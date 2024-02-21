@@ -1,0 +1,61 @@
+using UnityEngine;
+
+public class TankMovementCore : MonoBehaviour
+{
+    public Rigidbody _rb;
+
+    // Variable for movement
+    public float _speed = 12f; // Movement speed
+    public float _turnSpeed = 180f; // Turn speed
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        // Handle Movement
+        float verticalMovement = 0f;
+        float horizontalMovement = 0f;
+        float rotation = 0f;
+
+     
+        
+        
+       //   float verticalMovement = 0f; 
+        if (Input.GetKey(KeyCode.W))
+            verticalMovement = _speed * Time.fixedDeltaTime;
+        else if (Input.GetKey(KeyCode.S))
+            verticalMovement = -_speed * Time.fixedDeltaTime;
+        
+        // float horizontalMovement = 0f;
+        if (Input.GetKey(KeyCode.A))
+            horizontalMovement = -_speed * Time.fixedDeltaTime;
+        else if (Input.GetKey(KeyCode.D))
+            horizontalMovement = _speed * Time.fixedDeltaTime;
+
+       // float rotation = 0f;
+        if (Input.GetKey(KeyCode.Q))
+            rotation = -_turnSpeed * Time.fixedDeltaTime;
+        else if (Input.GetKey(KeyCode.E))
+            rotation = _turnSpeed * Time.fixedDeltaTime;
+
+        
+        
+        
+        
+        // Calculate movement direction based on input
+        Vector3 movementDirection = (transform.forward * verticalMovement) + (transform.right * horizontalMovement);
+
+        // Move the tank based on the calculated movement direction
+        _rb.MovePosition(_rb.position + movementDirection);
+
+        // Rotate the tank based on the calculated rotation
+        transform.Rotate(0f, rotation, 0f);
+        
+        
+        
+        
+    }
+}
