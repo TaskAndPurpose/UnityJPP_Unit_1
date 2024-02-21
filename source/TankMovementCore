@@ -1,0 +1,23 @@
+using UnityEngine;
+
+public class TankMovementCore : MonoBehaviour
+{
+    public Rigidbody _rb;
+    
+    // Variable for movement
+    public float _speed = 12f; // Vertical movement speed
+    public float _turnSpeed = 180f; // Horizontal turn speed
+
+    private void Update()
+    {
+        // Handle Turning
+        float horizontalTurn = Input.GetAxis("Horizontal");
+        transform.Rotate(Vector3.up * horizontalTurn * _turnSpeed * Time.deltaTime);
+        
+        // Handle Movement
+        float verticalMovement = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.forward * verticalMovement * _speed * Time.deltaTime);
+    }
+    
+    
+}
